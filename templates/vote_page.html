@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Głosowanie</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .voting-container {
+            text-align: center;
+            width: 80%;
+            max-width: 600px; /* Adjust the max width as needed */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+     </style>
+</head>
+<body>
+    <div class="voting-container">
+    <h1>Głosuj w wyborach: {{ election_name }}</h1>
+
+    <form action="/submit-vote" method="POST" onsubmit="return validateVote()">
+        <input type="hidden" name="electionName" value="{{ election_name }}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Oddaj głos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for candidate in candidates %}
+                <tr>
+                    <td>{{ candidate.name }}</td>
+                    <td>{{ candidate.surname }}</td>
+                    <td><input type="radio" name="voteCheckbox" value="{{ candidate.id }}"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <br>
+        <input type="submit" id="submitVote" class="action-button" value="Głosuj!">
+    </form>
+    <script>
+        function validateVote() {
+            const checkedBoxes = document.querySelectorAll('input[type="radio"]:checked');
+            if (checkedBoxes.length !== 1) {
+                alert('Please select exactly one candidate.');
+                return false;
+            }
+            return true;
+        }
+    </script>
+    </div>
+</body>
+</html>

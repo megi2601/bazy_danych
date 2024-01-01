@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Studenta</title>
+    <style>
+        .dashboard {
+            position: relative;
+            text-align: center;
+            margin: 30px auto;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .action-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #dc3545;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <a href="/logout" class="logout-button">Wyloguj</a>
+        <h1>Panel Studenta</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Status</th>
+                    <th>Zgłaszanie kandydata</th>
+                    <th>Głosowanie</th>
+                    <th>Wyniki</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for election in elections %}
+                <tr>
+                    <td>{{ election.name }}</td>
+                    <td>{{ election.status }}</td>
+                    <td>
+                        {% if election.register %}
+                        <form action="/candidates/{{ election.name }}" method="POST">
+                            <input type="submit" class="action-button" value="Zgłoś kandydata">
+                        </form>
+                            {% else %} {{ election.register_info }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not election.voted and not election.time %}
+                        <form action="/election/{{ election.name }}/vote" method="POST">
+                            <input type="submit" class="action-button" value="Głosuj">
+                        </form>
+                        {% elif election.voted %} Zagłosowano
+                        {% else %} Niedostępne
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if election.published %}
+                        <form action="/results/{{ election.name }}/" method="POST">
+                            <input type="submit" class="action-button" value="Pokaż wyniki">
+                        </form>                        
+                        {% else %} Niedostępne
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

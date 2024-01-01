@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj nowe wybory</title>
+    <!-- Add any necessary CSS styles here -->
+    <style>
+       body{ text-align: center}
+    </style>
+</head>
+<body>
+    <h1>Dodaj nowe wybory</h1>
+
+    <form action="/add-election" method="POST">
+        <label for="election_name">Nazwa wyborów:</label>
+        <input type="text" id="election_name" name="election_name" required><br><br>
+
+        <label for="places">Liczba posad:</label>
+        <input type="int" id="places" name="places" required><br><br>
+
+        <label for="election_date1">Termin zgłaszania kandydatów:</label>
+        <input type="date" id="election_date1" name="election_date1" required><br><br>
+        
+        <label for="election_date2">Termin rozpoczęcia:</label>
+        <input type="date" id="election_date2" name="election_date2" required><br><br>
+
+        <label for="election_date3">Termin zakończenia:</label>
+        <input type="date" id="election_date3" name="election_date3" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

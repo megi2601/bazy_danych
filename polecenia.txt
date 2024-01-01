@@ -1,0 +1,2 @@
+SELECT nr_indeksu, haslo FROM "Studenci"
+SELECT nazwa, termin_rozpoczecia, termin_zakonczenia, publikacja FROM "Wybory"

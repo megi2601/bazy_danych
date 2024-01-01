@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zgłoszenie</title>
+    <style>
+         body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-container {
+            text-align: center;
+            width: 80%;
+            max-width: 600px; /* Adjust the max width as needed */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+    <h1>Zgłoś kandydatów do: {{election_name}}</h1>
+
+    <form action="/submit-candidates" method="POST">
+        <input type="hidden" name="electionName" value="{{ election_name }}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Imię i nazwisko</th>
+                    <th>Wybierz</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for candidate in candidates %}
+                <tr>
+                    <td>{{ candidate.name }} {{ candidate.surname }}</td>
+                    <td><input type="checkbox" name="candidateIds[]" value="{{ candidate.id }}"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <br>
+        <input type="submit" id="submitCandidates" class="action-button" value="Zgłoś kandydatów">
+    </form>
+</div>
+</body>
+</html>

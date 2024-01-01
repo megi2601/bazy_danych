@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj studenta</title>
+    <style>
+       body{ text-align: center}
+    </style>
+</head>
+<body>
+    <h1>Dodaj studenta</h1>
+
+    <form action="/add-student" method="POST"onsubmit="return validateCheckbox()">
+        <label for="nr_ind">Nr indeksu:</label>
+        <input type="text" id="nr_ind" name="nr_ind" required><br><br>
+
+        <label for="name">Imię:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="surname">Nazwisko:</label>
+        <input type="text" id="surname" name="surname" required><br><br>
+        
+        <label>Czy w komisji?</label><br>
+        <input type="checkbox" id="qualifiedYes" name="isQualified" value="true" onclick="uncheckCheckbox('qualifiedNo')" >
+        <label for="qualifiedYes">Tak</label><br>
+        <input type="checkbox" id="qualifiedNo" name="isQualified" value="false" onclick="uncheckCheckbox('qualifiedYes')" >
+        <label for="qualifiedNo">Nie</label><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function uncheckCheckbox(checkboxId) {
+            const otherCheckbox = document.getElementById(checkboxId);
+            if (otherCheckbox.checked) {
+                otherCheckbox.checked = false;
+            }
+        }
+
+        function validateCheckbox() {
+            const checkboxYes = document.getElementById('qualifiedYes');
+            const checkboxNo = document.getElementById('qualifiedNo');
+
+            if (!(checkboxYes.checked || checkboxNo.checked)) {
+                alert('Please select one option');
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Council Dashboard</title>
+    <!-- Add any necessary CSS styles here -->
+    <style>
+        /* Add your CSS styles for the dashboard here */
+        .dashboard {
+            text-align: center;
+            margin: 30px auto;
+        }
+        .buttons {
+        margin-bottom: 20px;
+        text-align: center; /* Center the content */
+        }
+        .buttons a {
+            display: inline-block;
+            margin: 0 10px; /* Adjust spacing between buttons */
+            text-decoration: none;
+            color: #fff;
+            background-color: #359f0b;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .publish-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #dc3545;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        
+        .re-button {
+            top: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #24a139;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .rs-button {
+            top: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #24a139;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <a href="/logout" class="logout-button">Wyloguj</a>
+        <div class="buttons">
+            <a href="/register-election" class="re-button">Rejestracja wyborów</a> 
+            <a href="/register-student" class="rs-button">Rejestracja studenta</a> 
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nazwa wyborów</th>
+                    <th>Status</th>
+                    <th>Publikacja wyników</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for election in elections %}
+                <tr>
+                    <td>{{ election.name }}</td>
+                    <td>{{election.status}}</td>
+                    <td>
+                        {% if election.publish_button %}
+                            <!-- <button class="publish-button" onclick="publishElection({{ election.name }})">Publikuj</button> -->
+                            <form action="/publish-election/{{ election.name }}" method="POST">
+                                <input type="submit" class="publish-button" value="Publikuj">
+                            </form>
+                        {% else %}
+                            {%if election.published %} Opublikowano {%else%} Oczekiwanie na zakończenie {%endif%}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="/logout" class="logout-button">Logout</a>
+    <!-- <script>
+        // Function to handle publishing election
+        function publishElection(electionId) {
+            fetch(`/publish-election/${electionId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({}),
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Election published successfully');
+                    // Perform actions upon successful update (reload page, update UI, etc.)
+                    // For example: window.location.reload();
+                } else {
+                    console.error('Failed to publish election');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        } -->
+    <!-- </script> -->
+</body>
+</html>
