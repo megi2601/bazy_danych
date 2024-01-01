@@ -1,2 +1,12 @@
 SELECT nr_indeksu, haslo FROM "Studenci"
 SELECT nazwa, termin_rozpoczecia, termin_zakonczenia, publikacja FROM "Wybory"
+UPDATE "Wybory" SET publikacja = %s WHERE nazwa = *nazwa_wyborow*
+'INSERT INTO "Wybory" VALUES (%s, %s, %s, %s, %s)', (election_name, election_places, election_date1, election_date2, election_date3)
+'INSERT INTO "Studenci" (nr_indeksu, imie, nazwisko, czy_w_komisji) VALUES (%s, %s, %s, %s)', (id, name, surname, komisja)
+'SELECT nazwa, termin_zglaszania, termin_rozpoczecia, termin_zakonczenia, publikacja FROM "Wybory" JOIN "Wybory_Wyborcy" ON "Wybory".nazwa = "Wybory_Wyborcy".nazwa_wyborow WHERE nr_indeksu_wyborcy=%s', (session['username'],)
+'SELECT nazwa_wyborow, czy_zaglosowal FROM "Wybory_Wyborcy" WHERE nr_indeksu_wyborcy=%s', (session['username'],)
+'SELECT imie, nazwisko FROM "Wybory_Kandydaci" JOIN "Studenci" ON "Wybory_Kandydaci".nr_indeksu_kandydata = "Studenci".nr_indeksu WHERE nazwa_wyborow=%s', (election_name,)
+'UPDATE "Wybory_Kandydaci" SET liczba_glosow=liczba_glosow+1 WHERE nr_indeksu_kandydata=%s AND nazwa_wyborow = %s', (candidate_id, election_name)
+'UPDATE "Wybory_Wyborcy" SET czy_zaglosowal=true WHERE nr_indeksu_wyborcy=%s AND nazwa_wyborow = %s', (session['username'], election_name)
+'SELECT imie, nazwisko, liczba_glosow FROM "Wybory_Kandydaci" JOIN "Studenci" ON "Wybory_Kandydaci".nr_indeksu_kandydata = "Studenci".nr_indeksu WHERE "nazwa_wyborow" = %s ORDER BY liczba_glosow DESC;', (election_name,)
+'SELECT nr_indeksu, imie, nazwisko FROM "Studenci" WHERE nr_indeksu NOT IN ((SELECT nr_indeksu_kandydata FROM "Wybory_Kandydaci" WHERE nazwa_wyborow=%s)) AND czy_w_komisji=false', (election_name,)
