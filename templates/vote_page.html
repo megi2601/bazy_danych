@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Głosowanie</title>
@@ -16,7 +15,7 @@
         .voting-container {
             text-align: center;
             width: 80%;
-            max-width: 600px; /* Adjust the max width as needed */
+            max-width: 600px;
         }
 
         table {
@@ -67,7 +66,7 @@
         function validateVote() {
             const checkedBoxes = document.querySelectorAll('input[type="radio"]:checked');
             if (checkedBoxes.length !== 1) {
-                alert('Please select exactly one candidate.');
+                alert('Możesz wybrać tylko jednego kandydata.');
                 return false;
             }
             return true;

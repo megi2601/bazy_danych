@@ -116,8 +116,7 @@ FOR EACH ROW
 EXECUTE FUNCTION sprawdz_kandydata();
 
 
-insert into "Studenci" (nr_indeksu, imie, nazwisko, czy_w_komisji) values ('ab000000','a', 'b', 'false'), ('cd111111','c', 'c', 'true'),('ef222222','e', 'f', 'false'),('gh333333','g', 'h', 'true');
--- ('ij444444',4,i, j, False),
+insert into "Studenci" (nr_indeksu, imie, nazwisko, czy_w_komisji) values ('ab000000','Anna', 'Bąk', 'false'), ('cd111111','Cela', 'Dom', 'true'),('ef222222','Elon', 'Fly', 'false'),('gh333333','Greta', 'Home', 'true'),('ij444444','Iza', 'Jan', 'false');
 -- ('kl555555',5,k, l, True),
 -- ('mn666666',6,m, n, False),
 -- ('op777777',7,o, p, True),
@@ -127,15 +126,22 @@ insert into "Studenci" (nr_indeksu, imie, nazwisko, czy_w_komisji) values ('ab00
 -- ('wx111111',1,w, x, True),
 -- ('yz222222',1,y, z, False);
 
-insert into "Wybory" values ('przewodniczacy', 1, '2023-12-10', '2023-12-12', '2023-12-14');
-insert into "Wybory" values ('samorzad', 1, '2024-01-2', '2023-12-30', '2024-01-14');
-insert into "Wybory" values ('rada', 1, '2024-01-2', '2023-12-12', '2023-12-14', 'true');
+insert into "Wybory" values ('przewodniczacy', 1, '2023-12-10', '2023-12-12', '2023-12-14'); --zakonczone nieopublik
+insert into "Wybory" values ('prezydent', 1, '2023-12-10', '2023-12-12', '2023-12-14', 'true'); --zakonczone opublik
+insert into "Wybory" values ('samorzad', 4, '2024-01-2', '2024-01-10', '2024-02-20'); --glosowanie
+insert into "Wybory" values ('rada', 1, '2024-03-2', '2024-03-12', '2024-03-14'); -- odbeda sie, zglos kandydata
+
+insert into "Wybory_Kandydaci" values ('prezydent', 'ab000000', 3);
+insert into "Wybory_Kandydaci" values ('prezydent', 'ef222222', 5);
 
 insert into "Wybory_Kandydaci" values ('przewodniczacy', 'ab000000', 3);
-insert into "Wybory_Kandydaci" values ('samorzad', 'ef222222', 5);
+insert into "Wybory_Kandydaci" values ('przewodniczacy', 'ij444444', 2);
 
-insert into "Wybory_Kandydaci" values ('rada', 'ab000000', 3);
-insert into "Wybory_Kandydaci" values ('rada', 'ef222222', 5);
 
-insert into "Studenci" (nr_indeksu, imie, nazwisko, czy_w_komisji) values ('ij444444','i', 'j', False), ('kl555555','k', 'l', True);
+insert into "Wybory_Kandydaci" values ('samorzad', 'ef222222');
+insert into "Wybory_Kandydaci" values ('samorzad', 'ab000000');
+insert into "Wybory_Kandydaci" values ('samorzad', 'ij444444');
+
+
+
 

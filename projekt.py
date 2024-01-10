@@ -1,7 +1,20 @@
-from flask import Flask, render_template, request, redirect, session, jsonify
+'''
+uruchamianie: flask --app projekt run
+trzeba przejść do strony "/login"
+
+można zalogować się jako komisja (login i hasło: komisja)
+lub jako student (login - ideks (np.ab000000, lista w pliku sql), hasło: haslo)
+
+zarówno komisji, jak i studentom wyświetla się lista wyborów z informacjami na ich temat i możliwymi akcjami
+studentom z komisji wyświetla się pusta lista (nie mogą ingerować w wybory jako studenci, muszą jako komisja)
+'''
+
+
+
+
+from flask import Flask, render_template, request, redirect, session
 import psycopg2
 import psycopg2.extras 
-import json
 from datetime import datetime
 
 app = Flask(__name__)
@@ -9,9 +22,6 @@ app.secret_key = 'sk'
 
 conn = psycopg2.connect(host='lkdb', database='mrbd', password='ml439869ml439869')
 
-@app.route('/')
-def hello():
-    pass
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -36,7 +46,7 @@ def login():
                 return redirect('/komisja')
             elif users[username]['role'] == 'student':
                 return redirect('/student')
-        return 'Invalid credentials. Please try again.'
+        return 'Niepoprawne dane logowania. Spróbuj ponownie.'
 
     return render_template('login.html')
 
@@ -62,7 +72,7 @@ def council_dashboard():
                     publish_button = True
             election_data.append({'name':e[0], 'status':status, 'published':e[3], "publish_button" : publish_button})
         return render_template('council_dashboard.html', elections=election_data)
-    return redirect('/login')
+    return redirect('/')
     
 @app.route('/publish-election/<election_name>', methods=['POST'])
 def publish_election(election_name):

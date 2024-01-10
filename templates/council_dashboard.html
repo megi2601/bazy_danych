@@ -1,22 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Council Dashboard</title>
-    <!-- Add any necessary CSS styles here -->
+    <title>Panel komisji</title>
     <style>
-        /* Add your CSS styles for the dashboard here */
         .dashboard {
             text-align: center;
             margin: 30px auto;
         }
         .buttons {
         margin-bottom: 20px;
-        text-align: center; /* Center the content */
+        text-align: center; 
         }
         .buttons a {
             display: inline-block;
-            margin: 0 10px; /* Adjust spacing between buttons */
+            margin: 0 10px; 
             text-decoration: none;
             color: #fff;
             background-color: #359f0b;
@@ -96,7 +93,6 @@
                     <td>{{election.status}}</td>
                     <td>
                         {% if election.publish_button %}
-                            <!-- <button class="publish-button" onclick="publishElection({{ election.name }})">Publikuj</button> -->
                             <form action="/publish-election/{{ election.name }}" method="POST">
                                 <input type="submit" class="publish-button" value="Publikuj">
                             </form>
@@ -109,28 +105,5 @@
             </tbody>
         </table>
     </div>
-    <a href="/logout" class="logout-button">Logout</a>
-    <!-- <script>
-        // Function to handle publishing election
-        function publishElection(electionId) {
-            fetch(`/publish-election/${electionId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({}),
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Election published successfully');
-                    // Perform actions upon successful update (reload page, update UI, etc.)
-                    // For example: window.location.reload();
-                } else {
-                    console.error('Failed to publish election');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        } -->
-    <!-- </script> -->
 </body>
 </html>

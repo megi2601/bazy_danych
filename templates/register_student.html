@@ -21,12 +21,12 @@
         <input type="text" id="surname" name="surname" required><br><br>
         
         <label>Czy w komisji?</label><br>
-        <input type="checkbox" id="qualifiedYes" name="isQualified" value="true" onclick="uncheckCheckbox('qualifiedNo')" >
-        <label for="qualifiedYes">Tak</label><br>
-        <input type="checkbox" id="qualifiedNo" name="isQualified" value="false" onclick="uncheckCheckbox('qualifiedYes')" >
-        <label for="qualifiedNo">Nie</label><br><br>
+        <input type="checkbox" id="Yes" name="isQualified" value="true" onclick="uncheckCheckbox('No')" >
+        <label for="Yes">Tak</label><br>
+        <input type="checkbox" id="No" name="isQualified" value="false" onclick="uncheckCheckbox('Yes')" >
+        <label for="No">Nie</label><br><br>
 
-        <input type="submit" value="Submit">
+        <input type="submit" value="Dodaj">
     </form>
 
     <script>
@@ -38,11 +38,11 @@
         }
 
         function validateCheckbox() {
-            const checkboxYes = document.getElementById('qualifiedYes');
-            const checkboxNo = document.getElementById('qualifiedNo');
+            const checkboxYes = document.getElementById('Yes');
+            const checkboxNo = document.getElementById('No');
 
             if (!(checkboxYes.checked || checkboxNo.checked)) {
-                alert('Please select one option');
+                alert('Wybierz tylko jedną opcję.');
                 return false;
             }
             return true;
