@@ -2,11 +2,9 @@
 uruchamianie: flask --app projekt run
 trzeba przejść do strony "/login"
 
-można zalogować się jako komisja (login i hasło: komisja)
-lub jako student (login - ideks (np.ab000000, lista w pliku sql), hasło: haslo)
+student loguje się nr indeksu (można je zobaczyć w pliku sql) i hasłem 'haslo'.
 
-zarówno komisji, jak i studentom wyświetla się lista wyborów z informacjami na ich temat i możliwymi akcjami
-studentom z komisji wyświetla się pusta lista (nie mogą ingerować w wybory jako studenci, muszą jako komisja)
+jeśli jest w komisji, otwiera się panel komisji, jeśli nie jest w komisji, to otwiera się panel studenta
 '''
 
 
