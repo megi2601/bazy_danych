@@ -26,15 +26,12 @@ conn = psycopg2.connect(host='lkdb', database='mrbd', password='ml439869ml439869
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     cur = conn.cursor()
-    cur.execute('SELECT nr_indeksu, haslo FROM "Studenci"')
+    cur.execute('SELECT nr_indeksu, haslo, czy_w_komisji FROM "Studenci"')
     students=cur.fetchall()
     cur.close()
-    users = {
-    'komisja': {'password': 'komisja', 'role': 'komisja'},
-    }
+    users = dict()
     for student in students:
-        users[student[0]] = {'password': student[1], 'role' : "student"}
-    
+        users[student[0]] = {'password': student[1], 'role' : "student" if student[2] == 'false' else 'komisja'}
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
