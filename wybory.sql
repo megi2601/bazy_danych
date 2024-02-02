@@ -83,7 +83,7 @@ BEGIN
     INSERT INTO "Wybory_Wyborcy" ("nazwa_wyborow", "nr_indeksu_wyborcy")
     SELECT nazwa, NEW.nr_indeksu
     FROM "Wybory"
-    WHERE "Wybory".termin_zakonczenia < CURRENT_DATE 
+    WHERE "Wybory".termin_zakonczenia > CURRENT_DATE 
 	AND NEW.czy_w_komisji = FALSE;
     RETURN NEW;
 END;

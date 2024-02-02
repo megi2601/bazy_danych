@@ -29,7 +29,7 @@ def login():
     cur.close()
     users = dict()
     for student in students:
-        users[student[0]] = {'password': student[1], 'role' : "student" if student[2] == 'false' else 'komisja'}
+        users[student[0]] = {'password': student[1], 'role' : "student" if not student[2] else 'komisja'}
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
